@@ -2,8 +2,17 @@
 
 <ul>
   <% @tasks.each do |task|%>
-  <li><%= task.completed %> | <%= link_to task.title, task_path(task.id) %></li>
+
+    <li>
+      <% if task.completed %>
+        <i class="fa-solid fa-square-check"></i>
+      <% else %>
+        <i class="fas fa-square"></i>
+      <% end %>
+|     <%= link_to task.title, task_path(task.id) %>
+      <%= link_to "Delete", task_path(task), method: :delete, data: { confirm: "Are you sure?" } %>
+    </li>
   <% end %>
 </ul>
 
-<%= link_to "Create a new task", task_new_path %>
+<%= link_to "Create a new task", new_task_path %>
